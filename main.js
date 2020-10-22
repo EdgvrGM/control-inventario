@@ -5,9 +5,12 @@ var desc = document.getElementById("descripcion");
 var cant = document.getElementById("cantidad");
 var costo = document.getElementById("costo");
 var pos = document.getElementById("posicion");
+var delCode = document.getElementById("deleteCode");
+var search = document.getElementById("searchCode");
+
 // Botones
 var btnAdd = document.getElementById("addNew");
-var btnDel = document.getElementById("deleteCode");
+var btnDel = document.getElementById("deleteBtn");
 var btnSearch = document.getElementById("searchCode");
 var btnRec = document.getElementById("recuperar");
 var btnRec2 = document.getElementById("recuperarInv");
@@ -35,31 +38,33 @@ class Vector {
       this.arr.push(product);
     }
     console.log(this.arr);
+    console.log(this.arr[0].codigo);
   }
 
-  delete(productCode) {
-    for (i = 0; i < this.arr.length; i++) {
-      if (productCode == this.arr[i].codigo) {
+  delete(code) {
+    for (let i = 0; i < this.arr.length; i++) {
+      if (code == this.arr[i].codigo) {
         this.arr.splice(i, 1);
+        console.log(this.arr);
         return true;
       }
     }
   }
 
-  search(productCode) {
-    for (i = 0; i < this.arr.length; i++) {
-      if (productCode == this.arr[i].codigo) {
+  search(code) {
+    for (let i = 0; i < this.arr.length; i++) {
+      if (code == this.arr[i].codigo) {
         return true;
       }
     }
   }
   getList() {
-    for (i = 0; i < this.arr.length; i++) {
+    for (let i = 0; i < this.arr.length; i++) {
       return this.arr[i].name;
     }
   }
   getInvList() {
-    for (i = 0; i < this.arr.length; i++) {
+    for (let i = 0; i < this.arr.length; i++) {
       return this.arr[i].name.reverse();
     }
   }
@@ -67,19 +72,19 @@ class Vector {
     if (this.arr.length >= 20) {
       return false;
     } else {
-      this.arr[pos.value].push(product);
+      this.arr[pos.value - 1].push(product);
     }
-    console.log(this.arr[pos]);
+    console.log(this.arr[pos.value]);
   }
 }
 
 // Interaccion con la interfaz
 
 let array = new Vector();
+let product = "";
 btnAdd.addEventListener("click", () => {
-  console.log(nameP.value);
   if (pos > 0 && pos <= 20) {
-    let product = new Producto(
+    product = new Producto(
       nameP.value,
       code.value,
       desc.value,
@@ -88,7 +93,7 @@ btnAdd.addEventListener("click", () => {
     );
     array.addNew2(product);
   } else {
-    let product = new Producto(
+    product = new Producto(
       nameP.value,
       code.value,
       desc.value,
@@ -97,4 +102,8 @@ btnAdd.addEventListener("click", () => {
     );
     array.addNew(product);
   }
+});
+
+btnDel.addEventListener("click", () => {
+  array.delete(delCode.value);
 });
