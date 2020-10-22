@@ -11,7 +11,7 @@ var search = document.getElementById("searchCode");
 // Botones
 var btnAdd = document.getElementById("addNew");
 var btnDel = document.getElementById("deleteBtn");
-var btnSearch = document.getElementById("searchCode");
+var btnSearch = document.getElementById("searchBtn");
 var btnRec = document.getElementById("recuperar");
 var btnRec2 = document.getElementById("recuperarInv");
 
@@ -38,7 +38,6 @@ class Vector {
       this.arr.push(product);
     }
     console.log(this.arr);
-    console.log(this.arr[0].codigo);
   }
 
   delete(code) {
@@ -54,6 +53,7 @@ class Vector {
   search(code) {
     for (let i = 0; i < this.arr.length; i++) {
       if (code == this.arr[i].codigo) {
+        console.log(this.arr[i]);
         return true;
       }
     }
@@ -106,4 +106,8 @@ btnAdd.addEventListener("click", () => {
 
 btnDel.addEventListener("click", () => {
   array.delete(delCode.value);
+});
+
+btnSearch.addEventListener("click", () => {
+  array.search(search.value);
 });
