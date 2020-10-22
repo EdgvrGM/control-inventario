@@ -7,6 +7,8 @@ var costo = document.getElementById("costo");
 var pos = document.getElementById("posicion");
 var delCode = document.getElementById("deleteCode");
 var search = document.getElementById("searchCode");
+var li = document.getElementById("listar");
+var li2 = document.getElementById("listar2");
 
 // Botones
 var btnAdd = document.getElementById("addNew");
@@ -59,14 +61,20 @@ class Vector {
     }
   }
   getList() {
-    for (let i = 0; i < this.arr.length; i++) {
-      return this.arr[i].name;
+    let i = 0;
+    while (i <= this.arr.length) {
+      li.innerHTML += `${this.arr[i].nombre} <br/>`;
+      i++;
     }
   }
   getInvList() {
-    for (let i = 0; i < this.arr.length; i++) {
-      return this.arr[i].name.reverse();
+    let i = 0;
+    this.arr.reverse();
+    while (i <= this.arr.length) {
+      li2.innerHTML += `${this.arr[i].nombre} <br/>`;
+      i++;
     }
+    this.arr.reverse();
   }
   addNew2(product) {
     if (this.arr.length >= 20) {
@@ -110,4 +118,14 @@ btnDel.addEventListener("click", () => {
 
 btnSearch.addEventListener("click", () => {
   array.search(search.value);
+});
+
+btnRec.addEventListener("click", () => {
+  li.innerHTML = "";
+  array.getList();
+});
+
+btnRec2.addEventListener("click", () => {
+  li2.innerHTML = "";
+  array.getInvList();
 });
