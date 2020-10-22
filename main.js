@@ -1,10 +1,10 @@
 // Elementos del html
-var name = document.getElementById("nombre").value;
-var code = document.getElementById("codigo").value;
-var desc = document.getElementById("descripcion").value;
-var cant = document.getElementById("cantidad").value;
-var costo = document.getElementById("costo").value;
-var pos = document.getElementById("posicion").value;
+var nameP = document.getElementById("nombre");
+var code = document.getElementById("codigo");
+var desc = document.getElementById("descripcion");
+var cant = document.getElementById("cantidad");
+var costo = document.getElementById("costo");
+var pos = document.getElementById("posicion");
 // Botones
 var btnAdd = document.getElementById("addNew");
 var btnDel = document.getElementById("deleteCode");
@@ -34,6 +34,7 @@ class Vector {
     } else {
       this.arr.push(product);
     }
+    console.log(this.arr);
   }
 
   delete(productCode) {
@@ -62,4 +63,38 @@ class Vector {
       return this.arr[i].name.reverse();
     }
   }
+  addNew2(product) {
+    if (this.arr.length >= 20) {
+      return false;
+    } else {
+      this.arr[pos.value].push(product);
+    }
+    console.log(this.arr[pos]);
+  }
 }
+
+// Interaccion con la interfaz
+
+let array = new Vector();
+btnAdd.addEventListener("click", () => {
+  console.log(nameP.value);
+  if (pos > 0 && pos <= 20) {
+    let product = new Producto(
+      nameP.value,
+      code.value,
+      desc.value,
+      cant.value,
+      costo.value
+    );
+    array.addNew2(product);
+  } else {
+    let product = new Producto(
+      nameP.value,
+      code.value,
+      desc.value,
+      cant.value,
+      costo.value
+    );
+    array.addNew(product);
+  }
+});
