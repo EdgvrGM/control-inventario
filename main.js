@@ -1,4 +1,4 @@
-// Elementos del producto
+// Elementos del html
 var name = document.getElementById("nombre").value;
 var code = document.getElementById("codigo").value;
 var desc = document.getElementById("descripcion").value;
@@ -12,6 +12,7 @@ var btnSearch = document.getElementById("searchCode");
 var btnRec = document.getElementById("recuperar");
 var btnRec2 = document.getElementById("recuperarInv");
 
+// Clases
 class Producto {
   constructor(nombre, codigo, descripcion, cantidad, costo) {
     this.nombre = nombre;
@@ -26,12 +27,39 @@ class Vector {
   constructor() {
     this.arr = [];
   }
-}
-addNew(Producto);
-{
-  if (this.arr.length >= 20) {
-    return false;
-  } else {
-    this.arr.push(Producto);
+
+  addNew(product) {
+    if (this.arr.length >= 20) {
+      return false;
+    } else {
+      this.arr.push(product);
+    }
+  }
+
+  delete(productCode) {
+    for (i = 0; i < this.arr.length; i++) {
+      if (productCode == this.arr[i].codigo) {
+        this.arr.splice(i, 1);
+        return true;
+      }
+    }
+  }
+
+  search(productCode) {
+    for (i = 0; i < this.arr.length; i++) {
+      if (productCode == this.arr[i].codigo) {
+        return true;
+      }
+    }
+  }
+  getList() {
+    for (i = 0; i < this.arr.length; i++) {
+      return this.arr[i].name;
+    }
+  }
+  getInvList() {
+    for (i = 0; i < this.arr.length; i++) {
+      return this.arr[i].name.reverse();
+    }
   }
 }
