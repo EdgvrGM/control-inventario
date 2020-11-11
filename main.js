@@ -25,48 +25,86 @@ class Producto {
     this.descripcion = descripcion;
     this.cantidad = cantidad;
     this.costo = costo;
+    this.siguiente = null;
+  }
+  calcularPrecio() {
+    let productos = this.cantidad;
+    let precioProducto = this.costo;
+    let total = productos * precioProducto;
+    return total;
   }
 }
 
 class Vector {
   constructor() {
     this.arr = [];
+    this.capacidad = 20;
+    this.t = 0;
+    this.inicio = null;
   }
 
   addNew(product) {
-    if (this.arr.length >= 20) {
-      return false;
+    if (this.inicio == null) {
+      this.inicio = product;
     } else {
-      this.arr.push(product);
+      let aux = this.inicio;
+      while (aux.siguiente !== null) {
+        aux = aux.siguiente;
+      }
+      aux.siguiente = product;
     }
-    console.log(this.arr);
+    this.t++;
+    return product.product;
   }
 
   delete(code) {
-    for (let i = 0; i < this.arr.length; i++) {
-      if (code == this.arr[i].codigo) {
-        this.arr.splice(i, 1);
-        console.log(this.arr);
-        return true;
-      }
+    if (code < 0 || code > this.t) {
+      return false;
     }
+    let aux = this.inicio;
+    let anterior = null;
+
+    if (code == 0) {
+      this.head = aux.siguiente;
+    } else {
+      for (let i = 0; i < code; i++) {
+        anterior = aux;
+        aux = aux.siguiente;
+      }
+      anterior.siguiente = aux.siguiente;
+    }
+    this.t--;
+    return aux.product;
   }
 
   search(code) {
-    for (let i = 0; i < this.arr.length; i++) {
-      if (code == this.arr[i].codigo) {
-        console.log(this.arr[i]);
-        return true;
+    if (code < 0 || code >= this.t) {
+      return false;
+    }
+    let aux = this.inicio;
+    let anterior = null;
+
+    if (code == 0) {
+      return aux.producto;
+    } else {
+      for (let i = 0; i < code; i++) {
+        anterior = aux;
+        aux = aux.siguiente;
       }
+      return aux.product;
     }
   }
   getList() {
-    let i = 0;
-    while (i <= this.arr.length) {
-      li.innerHTML += `${this.arr[i].nombre} <br/>`;
-      i++;
+    let aux = this.inicio;
+    let list = "";
+    while (aux) {
+      lista += aux.product += " - ";
+      aux = aux.siguiente;
     }
+    list += "Proceso finalizado";
+    return list;
   }
+
   getInvList() {
     let i = 0;
     this.arr.reverse();
@@ -76,13 +114,26 @@ class Vector {
     }
     this.arr.reverse();
   }
-  addNew2(product) {
-    if (this.arr.length >= 20) {
+  addNew2(product, pos) {
+    if (pos < 0 || this.capacidad.length >= this.t) {
       return false;
     } else {
-      this.arr[pos.value - 1].push(product);
+      let aux = this.inicio;
+      let anterior;
+      if (pos == 0) {
+        product.siguiente = aux;
+        this.inicio = product;
+      } else {
+        for (let i = 0; i < pos; i++) {
+          anterior = aux;
+          aux = aux.siguiente;
+        }
+        product.siguiente = aux;
+        anterior.siguiente = product;
+      }
+      this.tamano++;
     }
-    console.log(this.arr[pos.value]);
+    return producto.producto;
   }
 }
 
